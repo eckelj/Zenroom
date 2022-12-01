@@ -75,7 +75,7 @@ ld := aarch64-linux-gnu
 system := Linux 
 ldadd += -lm
 cflags := -O3 -fPIC -D'ARCH=\"LINUX\"' -DARCH_LINUX ${defines}
-ldflags := -lm -lpthread
+ldflags := -lm -lpthread -latomic
 milagro_cmake_flags += -DCMAKE_SYSTEM_PROCESSOR="aarch64" -DCMAKE_CROSSCOMPILING=1 -DCMAKE_C_COMPILER_WORKS=1
 endif
 
@@ -124,7 +124,7 @@ endif
 ifneq (,$(findstring linux,$(MAKECMDGOALS)))
 defines += $(if ${COMPILE_LUA}, -DLUA_COMPILED)
 cflags := ${cflags} -fPIC ${cflags_protection} -D'ARCH=\"LINUX\"' -DARCH_LINUX ${defines}
-ldflags := -lm -lpthread
+ldflags := -lm -lpthread -latomic
 system := Linux
 endif
 
@@ -136,7 +136,7 @@ pi := ${CROSS_PI_PATH}
 gcc := ${pi}/bin/arm-linux-gnueabihf-gcc
 ar := ${pi}/bin/arm-linux-gnueabihf-ar
 cflags := -O3 -march=armv6 -mfloat-abi=hard -mfpu=vfp -I${pi}/arm-linux-gnueabihf/include -fPIC -D'ARCH=\"LINUX\"' -DARCH_LINUX ${defines}
-ldflags := -L${pi}arm-linux-gnueabihf/lib -lm -lpthread
+ldflags := -L${pi}arm-linux-gnueabihf/lib -lm -lpthread -latomic
 system := Linux
 endif
 
